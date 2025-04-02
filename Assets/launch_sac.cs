@@ -13,6 +13,7 @@ public class launch_sac : MonoBehaviour
     void Start() {
         // Get the Rigidbody component of the current GameObject
         Body = GetComponent<Rigidbody>();
+        Body.mass = mass;
     }
 
     // Update is called once per frame

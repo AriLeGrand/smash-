@@ -16,7 +16,7 @@ public class follow_camera : MonoBehaviour {
     void Update() {
         // Make the camera follow the target position
         if (Target_Transform != null) {
-            transform.position = new Vector3(Target_Transform.position.x, Target_Transform.position.y, Target_Transform.position.z - 10);
+            transform.position = new Vector3(Target_Transform.position.x + 2.0f, Target_Transform.position.y + 2.0f, Target_Transform.position.z - 8.0f);
         }
     }
 }
