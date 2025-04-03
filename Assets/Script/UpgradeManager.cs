@@ -9,9 +9,6 @@ public class UpgradeManager : MonoBehaviour
     public Button batForceButton;
     public Button bagMassButton;
 
-    public float batForceIncrease = 2f;
-    public float bagMassReduction = 1f;
-
     void Start()
     {
         UpdateUI();
@@ -19,22 +16,14 @@ public class UpgradeManager : MonoBehaviour
 
     public void UpgradeBatForce()
     {
-        if (GameManager.Instance.TrySpendGold(GameManager.Instance.upgradeBatForceCost))
-        {
-            GameManager.Instance.batForce += batForceIncrease;
-            GameManager.Instance.upgradeBatForceCost += 10;
-            UpdateUI();
-        }
+        GameManager.Instance.UpgradeBatForce();
+        UpdateUI();
     }
 
     public void UpgradeBagMass()
     {
-        if (GameManager.Instance.TrySpendGold(GameManager.Instance.upgradeBagMassCost))
-        {
-            GameManager.Instance.bagMass -= bagMassReduction;
-            GameManager.Instance.upgradeBagMassCost += 8;
-            UpdateUI();
-        }
+        GameManager.Instance.UpgradeBagMass();
+        UpdateUI();
     }
 
     void UpdateUI()

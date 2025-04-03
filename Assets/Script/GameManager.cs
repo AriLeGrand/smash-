@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
     public int gold = 0;
     public float goldPerUnit = 0.5f;
 
-    public float batForce = 10f;
-    public float bagMass = 10f;
+    public float batForce = 10;
+    public float bagMass = 10;
 
     public int upgradeBatForceCost = 20;
     public int upgradeBagMassCost = 15;
@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); 
-            LoadGold(); 
+            DontDestroyOnLoad(gameObject);
+            LoadData(); 
         }
         else
         {
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     public void AddGold(int amount)
     {
         gold += amount;
-        SaveGold(); 
+        SaveData();
         Debug.Log("Gold: " + gold);
     }
 
@@ -39,26 +39,65 @@ public class GameManager : MonoBehaviour
         if (gold >= amount)
         {
             gold -= amount;
-            SaveGold(); 
+            SaveData();
             return true;
         }
         return false;
     }
 
-    void SaveGold()
-    {
-        PlayerPrefs.SetInt("PlayerGold", gold);
-        PlayerPrefs.Save();
-    }
-
-    void LoadGold()
-    {
-        gold = PlayerPrefs.GetInt("PlayerGold", 0); 
-    }
-
     public void ResetGold()
     {
         gold = 0;
-        SaveGold();
+        SaveData();
+    }
+
+
+    public void UpgradeBatForce()
+    {
+        if (TrySpendGold(upgradeBatForceCost))
+        {
+            batForce += 2f;  
+            upgradeBatForceCost += 10; 
+            SaveData();
+        }
+    }
+
+    public void UpgradeBagMass()
+    {
+        if (TrySpendGold(upgradeBagMassCost))
+        {
+            bagMass -= 1f; 
+            upgradeBagMassCost += 8; 
+            SaveData();
+        }
+    }
+
+    void SaveData()
+    {
+        PlayerPrefs.SetInt("PlayerGold", gold);
+        PlayerPrefs.SetFloat("BatForce", batForce);
+        PlayerPrefs.SetFloat("BagMass", bagMass);
+        PlayerPrefs.SetInt("UpgradeBatForceCost", upgradeBatForceCost);
+        PlayerPrefs.SetInt("UpgradeBagMassCost", upgradeBagMassCost);
+        PlayerPrefs.Save();
+    }
+
+    void LoadData()
+    {
+        gold = PlayerPrefs.GetInt("PlayerGold", 0);
+        batForce = PlayerPrefs.GetFloat("BatForce", 10f);
+        bagMass = PlayerPrefs.GetFloat("BagMass", 10f);
+        upgradeBatForceCost = PlayerPrefs.GetInt("UpgradeBatForceCost", 20);
+        upgradeBagMassCost = PlayerPrefs.GetInt("UpgradeBagMassCost", 15);
+    }
+
+    public void ResetData()
+    {
+        gold = 0;
+        batForce = 10f;
+        bagMass = 10f;
+        upgradeBatForceCost = 20;
+        upgradeBagMassCost = 15;
+        SaveData();
     }
 }
