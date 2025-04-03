@@ -10,14 +10,16 @@ public class GameManager : MonoBehaviour
     public float batForce = 10f;
     public float bagMass = 10f;
 
-    public int upgradeBatForceCost = 20;  
-    public int upgradeBagMassCost = 15;   
+    public int upgradeBatForceCost = 20;
+    public int upgradeBagMassCost = 15;
 
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject); 
+            LoadGold(); 
         }
         else
         {
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
     public void AddGold(int amount)
     {
         gold += amount;
+        SaveGold(); 
         Debug.Log("Gold: " + gold);
     }
 
@@ -36,8 +39,26 @@ public class GameManager : MonoBehaviour
         if (gold >= amount)
         {
             gold -= amount;
-            return true; 
+            SaveGold(); 
+            return true;
         }
-        return false; 
+        return false;
+    }
+
+    void SaveGold()
+    {
+        PlayerPrefs.SetInt("PlayerGold", gold);
+        PlayerPrefs.Save();
+    }
+
+    void LoadGold()
+    {
+        gold = PlayerPrefs.GetInt("PlayerGold", 0); 
+    }
+
+    public void ResetGold()
+    {
+        gold = 0;
+        SaveGold();
     }
 }

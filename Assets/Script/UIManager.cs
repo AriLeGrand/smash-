@@ -33,4 +33,10 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void ResetGame()
+    {
+        GameManager.Instance.ResetGold();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
