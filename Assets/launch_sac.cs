@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class launch_sac : MonoBehaviour
 {
+    private bool HasLaunched = false;
+    private Vector3 startPosition; 
     public Rigidbody Body;
-    public float force = 10;
-    public float mass = 10;
+    public float bat_force = 10;
+    public float bag_mass = 10;
     public float timing = 0.5f; // Value between 0.0 and 1.0 
 
-    // Start is called before the first frame update
     void Start() {
-        // Get the Rigidbody component of the current GameObject
         Body = GetComponent<Rigidbody>();
-        Body.mass = mass;
+        Body.mass = bag_mass;
+        startPosition = transform.position;
     }
 
-    // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            float adjustedForce = force * mass * timing; // Calculate force based on mass and timing
+        if (!HasLaunched && Input.GetKeyDown(KeyCode.Space)) {
+            HasLaunched = true;
+            float adjustedForce = bat_force * bag_mass * timing; 
             Body.AddForce(new Vector3(adjustedForce, adjustedForce, 0), ForceMode.Impulse);
             Body.angularVelocity = new Vector3(0, 0, -adjustedForce);
         }
