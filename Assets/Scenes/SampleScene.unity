@@ -379,6 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target_Transform: {fileID: 2025358850}
+  BaseOffset: {x: 2, y: 2, z: -8}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,7 +633,7 @@ PrefabInstance:
     - target: {fileID: 6805980769111782332, guid: 7f63404498e23cd49aa9664afd6fc97e,
         type: 3}
       propertyPath: force
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
