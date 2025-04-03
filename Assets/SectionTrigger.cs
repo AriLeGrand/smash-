@@ -32,9 +32,12 @@ public class SectionTrigger : MonoBehaviour
 
         if (sactransform.position.x - transform.position.x > -10 && Has_spawned == false)
         {
-            Instantiate(Map_Section, transform.position + new Vector3(13.5f, 0, 0), Quaternion.identity);
+            GameObject newSection = Instantiate(Map_Section, transform.position + new Vector3(13.5f, 0, 0), Quaternion.identity);
+            newSection.name = Map_Section.name; // Fix instance name
             Has_spawned = true;
-        } else if (Has_spawned == true && sactransform.position.x - transform.position.x > 25) {
+        } 
+        else if (Has_spawned == true && sactransform.position.x - transform.position.x > 25) 
+        {
             Destroy(gameObject);
         }
     }
