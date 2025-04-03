@@ -19,5 +19,6 @@ public class GameManager : MonoBehaviour
     {
         gold += amount;
         Debug.Log("Gold: " + gold);
+
     }
 }
