@@ -5,36 +5,28 @@ using UnityEngine;
 public class launch_sac : MonoBehaviour
 {
     private bool HasLaunched = false;
-    private Vector3 startPosition; 
+    private bool hasStartedMoving = false; 
+    private Vector3 startPosition;
     public Rigidbody Body;
     public float timing = 0.5f; // Valeur entre 0.0 et 1.0 
 
-    public float velocityThreshold = 0.1f;  
-    public float angularVelocityThreshold = 0.1f; 
-    public float timeToEndGame = 2.0f;
+    public float velocityThreshold = 0.1f;
+    public float angularVelocityThreshold = 0.1f;
+    public float timeToEndGame = 2.0f;  
     private float immobileTime = 0f;
-
 
     private bool gameEnded = false;
 
     void Start()
     {
         Body = GetComponent<Rigidbody>();
-        Body.mass = GameManager.Instance.bagMass; 
+        Body.mass = GameManager.Instance.bagMass;
         startPosition = transform.position;
     }
 
     void Update()
     {
-        if (IsSacImmobilized())
-        {
-            immobileTime += Time.deltaTime;
-        }
-        else
-        {
-            immobileTime = 0f;
-        }
-
+        // Attente du lancer sans chrono
         if (!HasLaunched && Input.GetKeyDown(KeyCode.Space))
         {
             HasLaunched = true;
@@ -43,14 +35,28 @@ public class launch_sac : MonoBehaviour
             Body.angularVelocity = new Vector3(0, 0, -adjustedForce);
         }
 
+        if (HasLaunched && !hasStartedMoving && Body.velocity.magnitude > velocityThreshold)
+        {
+            hasStartedMoving = true;
+        }
+
+        if (hasStartedMoving && IsSacImmobilized())
+        {
+            immobileTime += Time.deltaTime;
+        }
+        else
+        {
+            immobileTime = 0f;
+        }
+
         if (immobileTime >= timeToEndGame)
         {
             EndGame();
         }
     }
 
-
-    bool IsSacImmobilized() {
+    bool IsSacImmobilized()
+    {
         return Body.velocity.magnitude < velocityThreshold && Body.angularVelocity.magnitude < angularVelocityThreshold;
     }
 
@@ -77,6 +83,4 @@ public class launch_sac : MonoBehaviour
             Debug.LogError("UIManager.Instance est NULL !");
         }
     }
-
-
 }
