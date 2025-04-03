@@ -14,9 +14,8 @@ public class launch_sac : MonoBehaviour
     public float velocityThreshold = 0.1f;  
     public float angularVelocityThreshold = 0.1f; 
     public float timeToEndGame = 2.0f;
-    private float immobileTime = 0f; 
+    private float immobileTime = 0f;
 
-    public float goldPerUnit = 0.5f; 
 
     private bool gameEnded = false;
 
@@ -54,12 +53,10 @@ public class launch_sac : MonoBehaviour
 
     void EndGame() {
         if (gameEnded) return; //si la game est finit alors ca fait r
-        Debug.Log("Gold per unit: " + goldPerUnit);
-
         Debug.Log("La partie est terminée !");
         
         float distanceTravelled = transform.position.x - startPosition.x;
-        int goldGained = Mathf.FloorToInt(distanceTravelled * goldPerUnit);
+        int goldGained = Mathf.FloorToInt(distanceTravelled * GameManager.Instance.goldPerUnit);
 
         GameManager.Instance.AddGold(goldGained);
 

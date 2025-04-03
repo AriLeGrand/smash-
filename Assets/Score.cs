@@ -6,7 +6,6 @@ public class Score : MonoBehaviour
     public Transform player;
     public Text scoreText;
 
-    public float goldPerUnit = 0.5f;
     private float lastPositionX;
 
     void Start()
@@ -22,7 +21,7 @@ public class Score : MonoBehaviour
 
         if (distanceTravelled > 0)
         {
-            float goldGained = distanceTravelled * goldPerUnit;
+            float goldGained = distanceTravelled * GameManager.Instance.goldPerUnit;
             GameManager.Instance.AddGold((int)goldGained);
         }
 
