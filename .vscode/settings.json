@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "smash-.sln"
+    "dotnet.defaultSolution": "smash-.sln",
+    "workbench.iconTheme": "vs-seti"
 }

@@ -14,9 +14,10 @@ public class ImpactFrameEffect : MonoBehaviour
 
     [SerializeField] private Material _materiaOutlinel;
 
+    [SerializeField] private TimeManager _timeManager;
+
     private int _active = Shader.PropertyToID("_Active");
 
-    // Start is called before the first frame update
     private void Start()
     {
         _impact.SetActive(false);
@@ -34,6 +35,7 @@ public class ImpactFrameEffect : MonoBehaviour
     {
         _impact.SetActive(true);
         _material.SetFloat(_active, 1f);
+        _timeManager.DoSlowMotion();
         yield return null;
 
     }
