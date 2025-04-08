@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    public float slowdownFactor = 0.05f;
-    public float slowdownLength = 2f;
+    public float slowdownFactor = 0.005f;
+    public float slowdownLength = 8f;
 
     void Update()
     {
