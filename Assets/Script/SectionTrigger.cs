@@ -20,8 +20,6 @@ public class SectionTrigger : MonoBehaviour
         sactransform = GameObject.Find("Sac")?.transform;
     }
 
-    void Test() { }
-
     void Update ()
     {
         if (sactransform == null)
@@ -32,12 +30,10 @@ public class SectionTrigger : MonoBehaviour
 
         if (sactransform.position.x - transform.position.x > -10 && Has_spawned == false)
         {
-            GameObject newSection = Instantiate(Map_Section, transform.position + new Vector3(13.5f, 0, 0), Quaternion.identity);
+            GameObject newSection = Instantiate(Map_Section, transform.position + new Vector3(30, 0, 0), Quaternion.identity);
             newSection.name = Map_Section.name; // Fix instance name
             Has_spawned = true;
-        } 
-        else if (Has_spawned == true && sactransform.position.x - transform.position.x > 25) 
-        {
+        } else if (Has_spawned == true && sactransform.position.x - transform.position.x > 40) {
             Destroy(gameObject);
         }
     }
