@@ -1,3 +1,5 @@
+using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,8 +12,11 @@ public class GameManager : MonoBehaviour
     public float batForce = 10;
     public float bagMass = 10;
 
+
+    public float ratio = 1.5f; 
     public int upgradeBatForceCost = 20;
     public int upgradeBagMassCost = 15;
+    public int upgradeGoldPerUnitCost = 100;
 
     void Awake()
     {
@@ -56,9 +61,9 @@ public class GameManager : MonoBehaviour
     {
         if (TrySpendGold(upgradeBatForceCost))
         {
-            batForce += 2f;  
-            upgradeBatForceCost += 10; 
-            SaveData();
+            batForce += 1; 
+            upgradeBatForceCost = Mathf.RoundToInt(upgradeBatForceCost * ratio);
+
         }
     }
 
@@ -66,9 +71,17 @@ public class GameManager : MonoBehaviour
     {
         if (TrySpendGold(upgradeBagMassCost))
         {
-            bagMass -= 1f; 
-            upgradeBagMassCost += 8; 
-            SaveData();
+            bagMass += 1;
+            upgradeBagMassCost = Mathf.RoundToInt(upgradeBagMassCost * ratio);
+        }
+    }
+
+    public void UpgradeGoldPerUnit()
+    {
+        if (TrySpendGold(upgradeGoldPerUnitCost))
+        {
+            goldPerUnit *= ratio;
+            upgradeGoldPerUnitCost = Mathf.RoundToInt(upgradeGoldPerUnitCost * ratio);
         }
     }
 

@@ -13,7 +13,6 @@ public class Score : MonoBehaviour
         lastPositionX = player.position.x;
     }
 
-    // Update is called once per frame
     void Update()
     {
         float distanceTravelled = player.position.x - lastPositionX;

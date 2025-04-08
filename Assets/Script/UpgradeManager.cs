@@ -5,9 +5,11 @@ public class UpgradeManager : MonoBehaviour
 {
     public Text batForceButtonText;
     public Text bagMassButtonText;
+    public Text goldUpgradeButtonText;
 
     public Button batForceButton;
     public Button bagMassButton;
+    public Button goldUpgradeButton;
 
     void Start()
     {
@@ -26,13 +28,21 @@ public class UpgradeManager : MonoBehaviour
         UpdateUI();
     }
 
+    public void UpgradeGoldPerUnit()
+    {
+        GameManager.Instance.UpgradeGoldPerUnit();
+        UpdateUI();
+    }
+
     void UpdateUI()
     {
-        batForceButtonText.text = "Améliorer Batte (" + GameManager.Instance.upgradeBatForceCost + " Gold)";
-        bagMassButtonText.text = "Réduire Masse (" + GameManager.Instance.upgradeBagMassCost + " Gold)";
+        batForceButtonText.text = "Upgrade Bat : " + GameManager.Instance.upgradeBatForceCost + " Gold";
+        bagMassButtonText.text = "Upgrade Bag : " + GameManager.Instance.upgradeBagMassCost + " Gold";
+        goldUpgradeButtonText.text = "Upgrade Gold Earned : " + GameManager.Instance.upgradeGoldPerUnitCost + " Gold";
 
         batForceButton.interactable = GameManager.Instance.gold >= GameManager.Instance.upgradeBatForceCost;
         bagMassButton.interactable = GameManager.Instance.gold >= GameManager.Instance.upgradeBagMassCost;
+        goldUpgradeButton.interactable = GameManager.Instance.gold >= GameManager.Instance.upgradeGoldPerUnitCost;
     }
 
     void Update()
