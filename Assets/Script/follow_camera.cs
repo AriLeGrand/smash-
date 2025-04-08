@@ -12,6 +12,7 @@ public class follow_camera : MonoBehaviour {
     public Vector3 BaseOffset = new Vector3(2.0f, 2.0f, -8.0f);
 
     private bool Has_launched = false;
+    public bool Is_shaking = false;
     //private IEnumerator Shake(float duration, float magnitude, float frequency = 15f, float returnThreshold = 0.1f)
     //{
     //    Quaternion originalRotation = transform.rotation;
@@ -60,6 +61,7 @@ public class follow_camera : MonoBehaviour {
     //}
 
     public IEnumerator HitCamera(float duration, Vector3 direction, float returnThreshold = 0.1f) {
+        Is_shaking = true;
         Quaternion originalRotation = transform.rotation;
         float currentTime = 0f;
 
@@ -92,6 +94,7 @@ public class follow_camera : MonoBehaviour {
 
         // Final snap to original rotation
         transform.rotation = originalRotation;
+        Is_shaking = false;
     }
     // Start is called before the first frame update
     void Start() {
