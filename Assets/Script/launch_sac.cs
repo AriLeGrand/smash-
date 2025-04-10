@@ -26,7 +26,6 @@ public class launch_sac : MonoBehaviour
 
     void Update()
     {
-        // Attente du lancer sans chrono
         if (!HasLaunched && Input.GetKeyDown(KeyCode.Space))
         {
             HasLaunched = true;
@@ -64,13 +63,15 @@ public class launch_sac : MonoBehaviour
     {
         if (gameEnded) return;
 
-        Debug.Log("Gold per unit: " + GameManager.Instance.goldPerUnit);
+        Debug.Log("Gold earned : " + GameManager.Instance.gold);
         Debug.Log("La partie est terminée !");
 
         float distanceTravelled = transform.position.x - startPosition.x;
         int goldGained = Mathf.FloorToInt(distanceTravelled * GameManager.Instance.goldPerUnit);
 
         GameManager.Instance.AddGold(goldGained);
+
+        GameManager.Instance.CheckAndUpdatePersonnalBest(Mathf.FloorToInt(distanceTravelled));
 
         gameEnded = true;
 

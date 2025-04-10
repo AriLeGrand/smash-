@@ -8,10 +8,9 @@ public class GameManager : MonoBehaviour
 
     public int gold = 0;
     public float goldPerUnit = 0.5f;
-
     public float batForce = 10;
     public float bagMass = 10;
-
+    public int personnalBestScore = 0;
 
     public float ratio = 1.5f; 
     public int upgradeBatForceCost = 20;
@@ -38,6 +37,16 @@ public class GameManager : MonoBehaviour
         SaveData();
         Debug.Log("Gold: " + gold);
     }
+
+    public void CheckAndUpdatePersonnalBest(int newScore)
+    {
+        if (newScore > personnalBestScore)
+        {
+            personnalBestScore = newScore;
+            SaveData();
+        }
+    }
+
 
     public bool TrySpendGold(int amount)
     {
@@ -92,6 +101,8 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat("BagMass", bagMass);
         PlayerPrefs.SetInt("UpgradeBatForceCost", upgradeBatForceCost);
         PlayerPrefs.SetInt("UpgradeBagMassCost", upgradeBagMassCost);
+        PlayerPrefs.SetInt("UpgradeGoldPerUnitCost", upgradeGoldPerUnitCost);
+        PlayerPrefs.SetInt("PersonnalBest", personnalBestScore);
         PlayerPrefs.Save();
     }
 
@@ -100,8 +111,11 @@ public class GameManager : MonoBehaviour
         gold = PlayerPrefs.GetInt("PlayerGold", 0);
         batForce = PlayerPrefs.GetFloat("BatForce", 10f);
         bagMass = PlayerPrefs.GetFloat("BagMass", 10f);
+        goldPerUnit = PlayerPrefs.GetFloat("GoldPerUnit", 0.5f);
         upgradeBatForceCost = PlayerPrefs.GetInt("UpgradeBatForceCost", 20);
         upgradeBagMassCost = PlayerPrefs.GetInt("UpgradeBagMassCost", 15);
+        personnalBestScore = PlayerPrefs.GetInt("PersonnalBest", 0);
+        upgradeGoldPerUnitCost = PlayerPrefs.GetInt("UpgradeGoldPerUnit", 100);
     }
 
     public void ResetData()
@@ -109,8 +123,11 @@ public class GameManager : MonoBehaviour
         gold = 0;
         batForce = 10f;
         bagMass = 10f;
+        goldPerUnit = 0.5f;
         upgradeBatForceCost = 20;
         upgradeBagMassCost = 15;
+        upgradeGoldPerUnitCost = 100;
+        personnalBestScore = 0;
         SaveData();
     }
 }

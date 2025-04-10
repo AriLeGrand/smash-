@@ -5,7 +5,7 @@ public class Score : MonoBehaviour
 {
     public Transform player;
     public Text scoreText;
-
+    
     private float lastPositionX;
 
     void Start()
