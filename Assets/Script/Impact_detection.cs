@@ -13,6 +13,9 @@ public class Impact_detection : MonoBehaviour
     
     public follow_camera FollowCameraScript; // Drag the GameObject with ScriptB in Inspector
 
+    public TimeManager slowmotionScript;
+
+    public Rigidbody Body;
 
     // Find by name
     void Start() {
@@ -26,20 +29,25 @@ public class Impact_detection : MonoBehaviour
     {
         // Calculate the impact force
         float impactForce = (collision.impulse.magnitude / Time.fixedDeltaTime) / 1000.0f;
-
+        
         if (impactForce >= minForceThreshold)
         {
-            HandleImpact(collision, impactForce);
+            HandleImpact(collision, Mathf.Clamp(impactForce, -75.0f, 75.0f));
         }
     }
 
     void HandleImpact(Collision collision, float force)
     {
-        // Debug.Log($"Hit {collision.gameObject.name} with force: {force}");
-        // Your custom logic here
 
-        if (FollowCameraScript != null) {
+        // Your custom logic here
+        Debug.Log($"Hit {collision.gameObject.name} with force: {force} velocity: {Body.velocity.magnitude}");
+
+        if (FollowCameraScript != null && FollowCameraScript.Is_shaking == false) {
             FollowCameraScript.StartCoroutine(FollowCameraScript.HitCamera(0.35f, new Vector3(force/5.0f, (force / 10.0f) * Random.Range(-1f, 1f), (force / 5.0f) * Random.Range(-1f, 1f)), 4.0f));
+            if (force > 60.0f || Body.velocity.magnitude > 50.0f)
+            {
+                slowmotionScript.DoSlowMotion();
+            }
         }
     }
 }

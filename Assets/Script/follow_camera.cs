@@ -8,10 +8,12 @@ using UnityEngine;
 
 public class follow_camera : MonoBehaviour {
     public Transform Target_Transform;
+    public Transform Target_Transform_Anim;
 
     public Vector3 BaseOffset = new Vector3(2.0f, 2.0f, -8.0f);
 
     private bool Has_launched = false;
+    public bool Is_shaking = false;
     //private IEnumerator Shake(float duration, float magnitude, float frequency = 15f, float returnThreshold = 0.1f)
     //{
     //    Quaternion originalRotation = transform.rotation;
@@ -60,6 +62,7 @@ public class follow_camera : MonoBehaviour {
     //}
 
     public IEnumerator HitCamera(float duration, Vector3 direction, float returnThreshold = 0.1f) {
+        Is_shaking = true;
         Quaternion originalRotation = transform.rotation;
         float currentTime = 0f;
 
@@ -92,6 +95,7 @@ public class follow_camera : MonoBehaviour {
 
         // Final snap to original rotation
         transform.rotation = originalRotation;
+        Is_shaking = false;
     }
     // Start is called before the first frame update
     void Start() {
@@ -100,17 +104,26 @@ public class follow_camera : MonoBehaviour {
         }
     }
 
-    // Update is called once per frame
-    void Update() {
-        // Make the camera follow the target position
-        if (Input.GetKeyDown(KeyCode.Space) && Has_launched == false) {
+    public void Shake() {
+        if (Has_launched == false) {
             //StartCoroutine(Shake(0.4f, 5.0f, 4.0f));
             StartCoroutine(HitCamera(0.75f, new Vector3(-5.0f, 5.0f, -2.207f), 4.0f));
-            Has_launched = true;
+            // Has_launched = true;
         }
+    }
 
+    public void SetHasLaunched(bool state) {
+        Has_launched = state;
+    }
+
+    // Update is called once per frame
+    void Update() {
         if (Target_Transform != null) {
-            transform.position = new Vector3(Target_Transform.position.x + BaseOffset.x, Target_Transform.position.y + BaseOffset.y, Target_Transform.position.z + BaseOffset.z);
+            if (Has_launched == true) {
+                transform.position = new Vector3(Target_Transform.position.x + BaseOffset.x, Target_Transform.position.y + BaseOffset.y, Target_Transform.position.z + BaseOffset.z);
+            } else {
+                transform.position = new Vector3(Target_Transform_Anim.position.x + BaseOffset.x, Target_Transform_Anim.position.y + BaseOffset.y, Target_Transform_Anim.position.z + BaseOffset.z);
+            }
         }
     }
 }
