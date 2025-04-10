@@ -17,7 +17,7 @@ public class Gold : MonoBehaviour
     {
         if (goldText != null && GameManager.Instance != null)
         {
-            goldText.text = GameManager.Instance.gold.ToString();
+            goldText.text = GameManager.Instance.gold.ToString("0");
         }
     }
 }
