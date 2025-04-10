@@ -17,6 +17,8 @@ public class Impact_detection : MonoBehaviour
 
     public Rigidbody Body;
 
+    public GameObject HitGroundEffectPrefab; // assigned in edit mode
+
     // Find by name
     void Start() {
         GameObject otherObject = GameObject.Find("Main Camera");
@@ -25,13 +27,16 @@ public class Impact_detection : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
+    void OnCollisionEnter(Collision collision) {
+        
+
         // Calculate the impact force
         float impactForce = (collision.impulse.magnitude / Time.fixedDeltaTime) / 1000.0f;
         
-        if (impactForce >= minForceThreshold)
-        {
+        if (impactForce >= minForceThreshold) {
+            GameObject HitGroundEffectPrefabInstance = Instantiate(HitGroundEffectPrefab);
+            HitGroundEffectPrefabInstance.transform.position = transform.position;
+            // HitGroundEffectPrefabInstance.transform.position = collision.transform.position;
             HandleImpact(collision, Mathf.Clamp(impactForce, -75.0f, 75.0f));
         }
     }
