@@ -20,7 +20,7 @@ public class launch_sac : MonoBehaviour
     public void LaunchSac() {
         if (Has_launched == false) {
             float adjustedForce = force * mass * timing; // Calculate force based on mass and timing
-            Body.AddForce(new Vector3((adjustedForce * dir.x) + 10.0f, (adjustedForce * dir.y) + 10.0f, 0), ForceMode.Impulse);
+            Body.AddForce(new Vector3((adjustedForce * dir.x) + 50.0f, (adjustedForce * dir.y) + 30.0f, 0), ForceMode.Impulse);
             Body.angularVelocity = new Vector3(0, 0, -adjustedForce);
             Has_launched = true;
         }
