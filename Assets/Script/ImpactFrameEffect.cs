@@ -36,7 +36,7 @@ public class ImpactFrameEffect : MonoBehaviour
         }
     }
 
-    private IEnumerator Impact()
+    public IEnumerator Impact()
     {
         // 1. Activer l'outline
         _outline.SetActive(true);
