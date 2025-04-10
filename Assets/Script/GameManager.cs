@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     public bool TrySpendGold(int amount)
     {
         if (gold >= amount)
@@ -64,7 +63,6 @@ public class GameManager : MonoBehaviour
         gold = 0;
         SaveData();
     }
-
 
     public void UpgradeBatForce()
     {
