@@ -18,6 +18,7 @@ public class SectionTrigger : MonoBehaviour
     void OnEnable ()    
     {
         sactransform = GameObject.Find("Sac")?.transform;
+        // Debug.Log("Max Float =" + float.MaxValue);
     }
 
     void Update ()
@@ -26,15 +27,22 @@ public class SectionTrigger : MonoBehaviour
         {
             return;
         }
-        
-
-        if (sactransform.position.x - transform.position.x > -10 && Has_spawned == false)
+        if (sactransform.position.x - transform.position.x > 70)
         {
-            GameObject newSection = Instantiate(Map_Section, transform.position + new Vector3(30, 0, 0), Quaternion.identity);
-            newSection.name = Map_Section.name; // Fix instance name
-            Has_spawned = true;
-        } else if (Has_spawned == true && sactransform.position.x - transform.position.x > 40) {
-            Destroy(gameObject);
+            // Debug.Log("Move...");
+            transform.position = new Vector3(transform.position.x + 70.0f * 3.0f, transform.position.y, transform.position.z);
         }
+
+        // Debug.Log(sactransform.position.x - transform.position.x);
+
+
+        //if (sactransform.position.x - transform.position.x > -10 && Has_spawned == false)
+        //{
+        //    GameObject newSection = Instantiate(Map_Section, transform.position + new Vector3(70, 0, 0), Quaternion.identity);
+        //    newSection.name = Map_Section.name; // Fix instance name
+        //    Has_spawned = true;
+        //} else if (Has_spawned == true && sactransform.position.x - transform.position.x > 100) {
+        //    Destroy(gameObject);
+        //}
     }
 }
