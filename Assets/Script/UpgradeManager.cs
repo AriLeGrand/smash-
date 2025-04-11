@@ -13,6 +13,16 @@ public class UpgradeManager : MonoBehaviour
 
     void Start()
     {
+        // Lier les boutons dynamiquement
+        if (batForceButton != null)
+            batForceButton.onClick.AddListener(UpgradeBatForce);
+
+        if (bagMassButton != null)
+            bagMassButton.onClick.AddListener(UpgradeBagMass);
+
+        if (goldUpgradeButton != null)
+            goldUpgradeButton.onClick.AddListener(UpgradeGoldPerUnit);
+
         UpdateUI();
     }
 

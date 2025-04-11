@@ -39,4 +39,4 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.ResetData();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-}
+} 

@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     {
         gold += amount;
         SaveData();
-        Debug.Log("Gold: " + gold);
+        // Debug.Log("Gold: " + gold);
     }
 
     public void CheckAndUpdatePersonnalBest(int newScore)

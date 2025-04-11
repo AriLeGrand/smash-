@@ -7,6 +7,7 @@ public class Score : MonoBehaviour
     public Text scoreText;
     
     private float lastPositionX;
+    private float spawnOffSet = 6.5f;
 
     void Start()
     {
@@ -16,7 +17,12 @@ public class Score : MonoBehaviour
     void Update()
     {
         float distanceTravelled = player.position.x - lastPositionX;
-        scoreText.text = "Score : " + player.position.x.ToString("0");
+        float displayScore = player.position.x - spawnOffSet;
+
+        displayScore = Mathf.Max(0f, displayScore);
+        scoreText.text = "Score : " + displayScore.ToString("0");
+
+        GameManager.Instance.CheckAndUpdatePersonnalBest((int)displayScore);
 
         if (distanceTravelled > 0)
         {
