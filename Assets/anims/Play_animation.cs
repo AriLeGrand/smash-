@@ -20,9 +20,12 @@ public class Play_animation : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.Space) && Has_launched == false) {
+    void Update()
+    {
+        if ((Input.GetKeyDown(KeyCode.Space) && Has_launched == false))
+        {
             StartCoroutine(Playanim());
+            Has_launched = true;
         }
     }
 

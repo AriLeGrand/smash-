@@ -27,7 +27,7 @@ public class Barre_oscilente : MonoBehaviour
 
         if (!HasPressedSpace)
         {
-            transform.position = new Vector3((Mathf.Sin(current_time) * 75.0f) + 85.0f, transform.position.y, transform.position.z);
+            transform.position = new Vector3((Mathf.Sin(current_time) * 130.0f) + 150.0f, transform.position.y, transform.position.z);
             current_time += Time.deltaTime;
 
             launch_sacScript.timing = 1.0f - Mathf.Abs(Mathf.Sin(current_time));
