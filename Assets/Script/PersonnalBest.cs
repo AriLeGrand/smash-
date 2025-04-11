@@ -17,7 +17,7 @@ public class PersonnalBest : MonoBehaviour
     {
         if (personnalBestText != null && GameManager.Instance != null)
         {
-            personnalBestText.text = "PB : " + GameManager.Instance.personnalBestScore.ToString("0");
+            personnalBestText.text = "PB : " + GameManager.Instance.personnalBestScore;
         }
     }
 }

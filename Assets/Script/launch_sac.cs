@@ -15,7 +15,7 @@ public class launch_sac : MonoBehaviour
 
     public float velocityThreshold = 0.1f;
     public float angularVelocityThreshold = 0.1f;
-    public float Time_to_end_game = 2.0f;
+    public float Time_to_end_game = 1.0f;
     private float Immobile_time = 0f;
 
     private bool Game_ended = false;
